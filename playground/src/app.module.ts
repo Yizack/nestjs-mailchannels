@@ -8,6 +8,8 @@ import { EmailsController } from "./emails/emails.controller.js";
       apiKey: "YOUR-API-KEY"
     })
   ],
-  controllers: [EmailsController]
+  controllers: [EmailsController],
+  providers: [],
+  exports: []
 })
 export class AppModule {}
