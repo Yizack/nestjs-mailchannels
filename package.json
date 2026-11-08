@@ -8,11 +8,11 @@
     "nestjs",
     "transactional"
   ],
-  "homepage": "https://github.com/Yizack/nestjs-mailchannels",
+  "homepage": "https://github.com/mailchannels/nestjs-mailchannels",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Yizack/nestjs-mailchannels.git"
+    "url": "git+https://github.com/mailchannels/nestjs-mailchannels.git"
   },
   "files": [
     "dist"

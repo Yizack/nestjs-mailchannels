@@ -12,7 +12,7 @@ Leverages [`@mailchannels/sdk`](https://github.com/mailchannels/mailchannels-ema
 package, the Official MailChannels Email API SDK for Node.js.
 
 - [✨ Release Notes](CHANGELOG.md)
-- [🏀 Online playground](https://stackblitz.com/github/yizack/nestjs-mailchannels?file=playground%2Fsrc%2Fapp.module.ts)
+- [🏀 Online playground](https://stackblitz.com/github/mailchannels/nestjs-mailchannels?file=playground%2Fsrc%2Fapp.module.ts)
 
 ## Contents
 
