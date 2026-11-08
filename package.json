@@ -21,7 +21,10 @@
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "format": "oxfmt --check",
-    "format:fix": "oxfmt"
+    "format:fix": "oxfmt",
+    "checks": "node --run test && node --run test:types &&node --run lint && node --run format",
+    "release": "node --run checks && changelogen --release --push --no-github",
+    "release:github": "changelogen gh release"
   },
   "dependencies": {
     "@mailchannels/sdk": "^1.9.1",
