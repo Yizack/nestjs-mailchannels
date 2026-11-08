@@ -20,6 +20,7 @@ package, the Official MailChannels Email API SDK for Node.js.
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#usage)
+- [License](#license)
 - [Development](#development)
 
 ## Features
@@ -150,6 +151,10 @@ import { EmailsController } from './emails/emails.controller.js'
   exports: []
 })
 ```
+
+## License
+
+[MIT License](LICENSE)
 
 ## Development
 
