@@ -20,6 +20,7 @@ package, the Official MailChannels Email API SDK for Node.js.
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Development](#development)
 
 ## Features
 
@@ -149,6 +150,39 @@ import { EmailsController } from './emails/emails.controller.js'
   exports: []
 })
 ```
+
+## Development
+
+<details>
+  <summary>Local development</summary>
+
+```sh
+# Install dependencies
+pnpm install
+
+# Prepare environment
+pnpm build
+
+# Develop with the playground
+pnpm playground:start
+
+# Run Oxlint
+pnpm lint
+
+# Run Formatter
+pnpm format
+
+# Run Tests
+pnpm test
+
+# Run typecheck
+pnpm test:types
+
+# Release new version
+pnpm release
+```
+
+</details>
 
 <!-- oxfmt-ignore-start -->
 

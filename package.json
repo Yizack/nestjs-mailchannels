@@ -16,6 +16,7 @@
   },
   "scripts": {
     "build": "tsdown",
+    "playground:start": "cd playground && pnpm start",
     "test:types": "tsc --noEmit",
     "test": "node --run build && node --run test:types && node --test test/*.test.ts",
     "lint": "oxlint",
