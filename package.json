@@ -2,7 +2,12 @@
   "name": "nestjs-mailchannels",
   "version": "0.1.0",
   "description": "NestJS module for the MailChannels Email API",
+  "homepage": "https://github.com/Yizack/nestjs-mailchannels",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yizack/nestjs-mailchannels.git"
+  },
   "files": [
     "dist"
   ],
