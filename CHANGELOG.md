@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.1.2
+
+[compare changes](https://github.com/mailchannels/nestjs-mailchannels/compare/v0.1.1...v0.1.2)
+
+### 🩹 Fixes
+
+- **build:** Add missing `prepack` script for publishing ([d99cded](https://github.com/mailchannels/nestjs-mailchannels/commit/d99cded))
+
+### ❤️ Contributors
+
+- Yizack Rangel ([@Yizack](https://github.com/Yizack))
+
 ## v0.1.1
 
 [compare changes](https://github.com/mailchannels/nestjs-mailchannels/compare/v0.1.0...v0.1.1)
