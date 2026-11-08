@@ -1,0 +1,44 @@
+{
+  "name": "nestjs-mailchannels",
+  "version": "0.1.0",
+  "description": "NestJS module for the MailChannels Email API",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.mjs"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "test:types": "tsc --noEmit",
+    "test": "node --run build && node --run test:types && node --test test/*.test.ts",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "format": "oxfmt --check",
+    "format:fix": "oxfmt"
+  },
+  "dependencies": {
+    "@mailchannels/sdk": "^1.9.1",
+    "@nestjs/common": "^12.4.0"
+  },
+  "devDependencies": {
+    "@nestjs/core": "^12.4.0",
+    "@types/node": "^26.6.6",
+    "oxfmt": "^0.77.0",
+    "oxlint": "^1.92.0",
+    "reflect-metadata": "^0.2.2",
+    "tsdown": "^0.23.7",
+    "typescript": "^6.0.3"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "packageManager": "pnpm@12.18.0"
+}

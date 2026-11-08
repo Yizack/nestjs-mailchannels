@@ -1,0 +1,32 @@
+name: autofix.ci
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/setup@v3
+        with:
+          runtime: node@lts
+          cache: true
+
+      - name: 🚧 Prepare environment
+        run: node --run build
+
+      - name: 🔎 Lint
+        run: node --run lint:fix
+
+      - name: ✒️ Format
+        run: node --run format:fix
+
+      - name: ⚙️ Auto-fix
+        uses: autofix-ci/action@c5b2d67aa2274e7b5a18224e8171550871fc7e4a

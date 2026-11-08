@@ -1,0 +1,43 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  NODE_OPTIONS: --max-old-space-size=6144
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number || github.sha }}
+  cancel-in-progress: ${{ github.event_name != 'push' }}
+
+jobs:
+  checks:
+    # autofix workflow will be triggered instead for PRs
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+      - uses: pnpm/setup@v3
+        with:
+          runtime: node@lts
+          cache: true
+
+      - name: 🧪 Run test suite
+        run: node --run test
+
+      - name: 🧪 Test types
+        run: node --run test:types
+
+      - name: 🔎 Lint
+        run: node --run lint
+
+      - name: ✒️ Format
+        run: node --run format
