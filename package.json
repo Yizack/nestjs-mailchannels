@@ -27,6 +27,7 @@
   },
   "scripts": {
     "build": "tsdown",
+    "prepack": "node --run build",
     "playground:start": "cd playground && pnpm start",
     "test:types": "tsc --noEmit",
     "test": "node --run build && node --run test:types && node --test test/*.test.ts",
