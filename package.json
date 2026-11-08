@@ -34,6 +34,7 @@
   "devDependencies": {
     "@nestjs/core": "^12.4.0",
     "@types/node": "^26.6.6",
+    "changelogen": "^0.6.2",
     "oxfmt": "^0.77.0",
     "oxlint": "^1.92.0",
     "reflect-metadata": "^0.2.2",
