@@ -1,4 +1,4 @@
-# Nestjs MailChannels
+# NestJS MailChannels
 
 <!-- oxfmt-ignore-start -->
 [![npm version][npm-version-src]][npm-version-href]
