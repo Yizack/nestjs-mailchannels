@@ -52,32 +52,41 @@ $ pnpm add nestjs-mailchannels
 ### Import the module
 
 ```ts
-import { Module } from '@nestjs/common'
-import { MailChannelsModule } from 'nestjs-mailchannels'
+import { Module } from "@nestjs/common";
+import { MailChannelsModule } from "nestjs-mailchannels";
 
 @Module({
   imports: [
     MailChannelsModule.forRoot({
-      apiKey: 'YOUR-API-KEY'
+      apiKey: "YOUR-API-KEY",
+      defaults: {
+        from: "Name <from@example.com>"
+      }
     })
   ],
   controllers: [],
   providers: [],
   exports: []
 })
+export class AppModule {}
 ```
+
+`defaults` can configure `from`, `subject`, `to`, `headers`, and `dkim`. Configured values can be
+omitted from individual calls, and values supplied on an individual message take precedence. When
+using `personalizations`, recipients are specified per personalization, so a top-level default `to`
+is not applied.
 
 ### Import the module Asynchronously
 
 ```ts
-import { Module } from '@nestjs/common'
-import { MailChannelsModule } from 'nestjs-mailchannels'
+import { Module } from "@nestjs/common";
+import { MailChannelsModule } from "nestjs-mailchannels";
 
 @Module({
   imports: [
     MailChannelsModule.forRootAsync({
       useFactory: async () => ({
-        apiKey: 'YOUR-API-KEY'
+        apiKey: "YOUR-API-KEY"
       })
     })
   ],
@@ -85,6 +94,7 @@ import { MailChannelsModule } from 'nestjs-mailchannels'
   providers: [],
   exports: []
 })
+export class AppModule {}
 ```
 
 ### Controller for sending emails
@@ -136,20 +146,21 @@ export class EmailsController {
 ### Add your controller to your module
 
 ```ts
-import { Module } from '@nestjs/common'
-import { MailChannelsModule } from 'nestjs-mailchannels'
-import { EmailsController } from './emails/emails.controller.js'
+import { Module } from "@nestjs/common";
+import { MailChannelsModule } from "nestjs-mailchannels";
+import { EmailsController } from "./emails/emails.controller.js";
 
 @Module({
   imports: [
     MailChannelsModule.forRoot({
-      apiKey: 'YOUR-API-KEY'
+      apiKey: "YOUR-API-KEY"
     })
   ],
   controllers: [EmailsController], // Add your controller here
   providers: [],
   exports: []
 })
+export class AppModule {}
 ```
 
 ## License

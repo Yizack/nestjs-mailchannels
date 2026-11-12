@@ -8,7 +8,6 @@ export class EmailsController {
   @Post("emails/send")
   async send() {
     const { data, error } = await this.mailchannelsService.emails.send({
-      from: "Name <from@example.com>",
       to: "to@example.net",
       subject: "Test email",
       text: "Hello from NestJS",
@@ -25,7 +24,6 @@ export class EmailsController {
   @Post("emails/queue")
   async queue() {
     const { data, error } = await this.mailchannelsService.emails.queue({
-      from: "Name <from@example.com>",
       to: "to@example.net",
       subject: "Test email",
       text: "Hello from NestJS",
