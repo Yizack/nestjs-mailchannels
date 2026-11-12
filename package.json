@@ -41,14 +41,14 @@
   },
   "dependencies": {
     "@mailchannels/sdk": "^1.9.1",
-    "@nestjs/common": "^12.4.0"
+    "@nestjs/common": "^12.5.0"
   },
   "devDependencies": {
-    "@nestjs/core": "^12.4.0",
+    "@nestjs/core": "^12.5.0",
     "@types/node": "^26.6.6",
     "changelogen": "^0.6.2",
-    "oxfmt": "^0.77.0",
-    "oxlint": "^1.92.0",
+    "oxfmt": "^0.78.0",
+    "oxlint": "^1.93.0",
     "reflect-metadata": "^0.2.2",
     "tsdown": "^0.23.7",
     "typescript": "^6.0.3"
