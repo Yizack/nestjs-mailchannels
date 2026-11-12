@@ -1,5 +1,29 @@
 # Changelog
 
+## v0.1.3
+
+[compare changes](https://github.com/mailchannels/nestjs-mailchannels/compare/v0.1.2...v0.1.3)
+
+### 🚀 Enhancements
+
+- Support default email options ([#1](https://github.com/mailchannels/nestjs-mailchannels/pull/1))
+
+### 📖 Documentation
+
+- Fix NestJS capitalization ([ae66145](https://github.com/mailchannels/nestjs-mailchannels/commit/ae66145))
+
+### 🏡 Chore
+
+- **playground:** Use workspace package imports ([3db08af](https://github.com/mailchannels/nestjs-mailchannels/commit/3db08af))
+
+### ✅ Tests
+
+- Migrate tests to Vitest ([3eca4e3](https://github.com/mailchannels/nestjs-mailchannels/commit/3eca4e3))
+
+### ❤️ Contributors
+
+- Yizack Rangel ([@Yizack](https://github.com/Yizack))
+
 ## v0.1.2
 
 [compare changes](https://github.com/mailchannels/nestjs-mailchannels/compare/v0.1.1...v0.1.2)
