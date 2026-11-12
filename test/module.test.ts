@@ -1,11 +1,9 @@
-import "reflect-metadata";
-import assert from "node:assert/strict";
-import { test } from "node:test";
+import { expect, it, vi } from "vitest";
 import { NestFactory } from "@nestjs/core";
 import { MailChannels } from "@mailchannels/sdk";
 import { MailChannelsModule, MailChannelsService } from "../dist/index.mjs";
 
-test("ESM consumers can import named exports and start a Nest application", async (t) => {
+it("ESM consumers can import named exports and start a Nest application", async () => {
   class AppModule {}
   const app = await NestFactory.createApplicationContext(
     {
@@ -18,13 +16,13 @@ test("ESM consumers can import named exports and start a Nest application", asyn
     }
   );
 
-  t.after(() => app.close());
-
   const service = app.get(MailChannelsService);
-  assert.ok(service instanceof MailChannels);
+  expect(service).toBeInstanceOf(MailChannels);
+
+  await app.close();
 });
 
-test("email defaults apply to send, queue, and sendAsync unless overridden", async () => {
+it("email defaults apply to send, queue, and sendAsync unless overridden", async () => {
   const service = new MailChannelsService({
     apiKey: "test-api-key",
     baseUrl: "https://mailchannels.test",
@@ -35,53 +33,57 @@ test("email defaults apply to send, queue, and sendAsync unless overridden", asy
       headers: { "X-Default": "configured" }
     }
   });
-  const requests: { url: string; body: string }[] = [];
-  const originalFetch = globalThis.fetch;
 
-  globalThis.fetch = async (input, init) => {
-    requests.push({ url: String(input), body: String(init?.body) });
-    return new Response(
-      JSON.stringify({ data: {}, queued_at: "2026-01-01T00:00:00Z", request_id: "test" }),
-      { headers: { "content-type": "application/json" } }
-    );
-  };
+  const fetchMock = vi
+    .spyOn(globalThis, "fetch")
+    .mockResolvedValueOnce(new Response())
+    .mockResolvedValueOnce(new Response())
+    .mockResolvedValueOnce(new Response())
+    .mockResolvedValueOnce(new Response());
 
-  try {
-    await service.emails.send({ text: "Hello" });
-    await service.emails.queue({
-      from: "override@example.com",
-      to: "override-to@example.com",
-      subject: "Queue",
-      text: "Hello"
-    });
-    await service.emails.sendAsync({ text: "Hello" });
-    await service.emails.send({
-      personalizations: [{ to: "personal@example.com" }],
-      subject: "Personalization",
-      text: "Hello"
-    });
-  } finally {
-    globalThis.fetch = originalFetch;
-  }
+  await service.emails.send({ text: "Hello" });
+  await service.emails.queue({
+    from: "override@example.com",
+    to: "override-to@example.com",
+    subject: "Queue",
+    text: "Hello"
+  });
+  await service.emails.sendAsync({ text: "Hello" });
+  await service.emails.send({
+    personalizations: [{ to: "personal@example.com" }],
+    subject: "Personalization",
+    text: "Hello"
+  });
 
-  assert.equal(requests.length, 4);
-  assert.match(requests[0].body, /default@example\.com/);
-  assert.match(requests[0].body, /default-to@example\.com/);
-  assert.match(requests[0].body, /Default subject/);
-  assert.match(requests[0].body, /X-Default/);
-  assert.match(requests[1].body, /override@example\.com/);
-  assert.match(requests[1].body, /override-to@example\.com/);
-  assert.match(requests[1].body, /Queue/);
-  assert.doesNotMatch(requests[1].body, /default@example\.com/);
-  assert.doesNotMatch(requests[1].body, /default-to@example\.com/);
-  assert.doesNotMatch(requests[1].body, /Default subject/);
-  assert.match(requests[2].body, /default@example\.com/);
-  assert.match(requests[2].body, /default-to@example\.com/);
-  assert.match(requests[2].body, /Default subject/);
-  assert.match(requests[3].body, /personal@example\.com/);
-  assert.doesNotMatch(requests[3].body, /default-to@example\.com/);
-  assert.equal(new URL(requests[0].url).pathname, "/tx/v1/send");
-  assert.equal(new URL(requests[1].url).pathname, "/tx/v1/send-async");
-  assert.equal(new URL(requests[2].url).pathname, "/tx/v1/send-async");
-  assert.equal(new URL(requests[3].url).pathname, "/tx/v1/send");
+  const requests = fetchMock.mock.calls.map(([input, init]) => ({
+    path: new URL(String(input)).pathname,
+    body: String(init?.body)
+  }));
+
+  fetchMock.mockRestore();
+
+  expect(requests).toHaveLength(4);
+
+  expect(requests[0].path).toBe("/tx/v1/send");
+  expect(requests[0].body).toMatch(/default@example\.com/);
+  expect(requests[0].body).toMatch(/default-to@example\.com/);
+  expect(requests[0].body).toMatch(/Default subject/);
+  expect(requests[0].body).toMatch(/X-Default/);
+
+  expect(requests[1].path).toBe("/tx/v1/send-async");
+  expect(requests[1].body).toMatch(/override@example\.com/);
+  expect(requests[1].body).toMatch(/override-to@example\.com/);
+  expect(requests[1].body).toMatch(/Queue/);
+  expect(requests[1].body).not.toMatch(/default@example\.com/);
+  expect(requests[1].body).not.toMatch(/default-to@example\.com/);
+  expect(requests[1].body).not.toMatch(/Default subject/);
+
+  expect(requests[2].path).toBe("/tx/v1/send-async");
+  expect(requests[2].body).toMatch(/default@example\.com/);
+  expect(requests[2].body).toMatch(/default-to@example\.com/);
+  expect(requests[2].body).toMatch(/Default subject/);
+
+  expect(requests[3].path).toBe("/tx/v1/send");
+  expect(requests[3].body).toMatch(/personal@example\.com/);
+  expect(requests[3].body).not.toMatch(/default-to@example\.com/);
 });

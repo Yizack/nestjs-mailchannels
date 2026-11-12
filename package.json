@@ -30,7 +30,7 @@
     "prepack": "node --run build",
     "playground:start": "cd playground && pnpm start",
     "test:types": "tsc --noEmit",
-    "test": "node --run build && node --run test:types && node --test test/*.test.ts",
+    "test": "node --run build && node --run test:types && vitest run",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "format": "oxfmt --check",
@@ -51,7 +51,8 @@
     "oxlint": "^1.93.0",
     "reflect-metadata": "^0.2.2",
     "tsdown": "^0.23.7",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vitest": "^5.1.0"
   },
   "engines": {
     "node": ">=22.12.0"
