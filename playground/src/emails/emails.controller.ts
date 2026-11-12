@@ -1,5 +1,5 @@
 import { Controller, HttpException, Post } from "@nestjs/common";
-import { MailChannelsService } from "../../../dist/index.mjs";
+import { MailChannelsService } from "nestjs-mailchannels";
 
 @Controller()
 export class EmailsController {

@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-import { MailChannelsModule } from "../../dist/index.mjs";
+import { MailChannelsModule } from "nestjs-mailchannels";
 import { EmailsController } from "./emails/emails.controller.js";
 
 @Module({
